@@ -43,6 +43,7 @@ app.post('/performance/model/upload',upload.upload);
 app.post('/performance/model/uploadFile',upload.uploadFile); //上传文件
 app.get('/performance/model/download',upload.download); //下载文件
 app.post('/performance/model/del',upload.del); //删除文件
+
 //查询
 let query  = require('./api/query.js');
 app.post('/performance/model/query',query.query);
@@ -50,10 +51,8 @@ app.post('/performance/model/findQuery',query.findQuery);
 app.get('/performance/model/images',query.images);
 
 //删除
-
 let del = require('./api/delete.js');
 app.post("/performance/model/delete",del.delete);
-
 app.get("/performance/model/hello", function(request, response){
     response.send("hello!");
 });
