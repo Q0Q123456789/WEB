@@ -1,6 +1,7 @@
 let express = require("express");
 let DB = require('../model/db.js');
 let config = require('../model/config.js');
+let mysql = require('../model/MySQL.js');
 let app = express(); /*实例化使用*/
 
 let ObjectId = require('mongodb').ObjectID;
@@ -86,6 +87,34 @@ app.findQuery = function (req,res) {
     })
 };
 
+app.mysqlQuery = function (req,res) {
+    // console.log(req);
+    // console.log(res);
+    let sql = 'SELECT * from T_Area';
+    mysql.find(sql).then(rows => {
+        let map = {};
+        rows.forEach(element => {
+            map[element.areaId] = element
+        });
+        let val = [];
+        rows.forEach(function (item) {
+            let parent = map[item.parentId];
+            if (parent) {
+                (parent.children || (parent.children = [])).push(item);
+            } else {
+                val.push(item);
+            }
+        });
+        config.obj = {
+            responseCode: "10001",
+            responseMsg: "成功！",
+            data:val
+        };
+        res.json(config.obj);
+    }).catch(err => {
+        console.log(err);
+    });
+}
 
 module.exports = app;
 console.log('查询-----加载成功');
