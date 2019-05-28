@@ -27,6 +27,16 @@ app.all('*', function (req, res, next) {
   next()
 });
 
+app.use(function(req, res, next) {
+  console.log(res);
+  // if (!req.headers.setcookie) {
+  //   return
+  // }
+  console.log(req.headers.setcookie);
+
+  next();
+});
+
 //仓库
 let api  = require('./api/server.js');
 app.post('/performance/model/warehousing',api.warehousing); //获取仓库信息
