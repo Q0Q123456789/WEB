@@ -48,7 +48,7 @@ app.post('/performance/model/del',upload.del); //删除文件
 let query  = require('./api/query.js');
 app.post('/performance/model/query',query.query);
 app.post('/performance/model/findQuery',query.findQuery);
-app.get('/performance/model/mysqlQuery',query.mysqlQuery);
+app.post('/performance/model/mysqlQuery',query.mysqlQuery);
 app.get('/performance/model/images',query.images);
 
 //删除

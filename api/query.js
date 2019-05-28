@@ -88,13 +88,13 @@ app.findQuery = function (req,res) {
 };
 
 app.mysqlQuery = function (req,res) {
-    // console.log(req);
-    // console.log(res);
     let sql = 'SELECT * from T_Area';
     mysql.find(sql).then(rows => {
         let map = {};
         rows.forEach(element => {
-            map[element.areaId] = element
+            element.label = element.areaName;
+            element.value = element.areaId;
+            map[element.value] = element
         });
         let val = [];
         rows.forEach(function (item) {
@@ -114,7 +114,7 @@ app.mysqlQuery = function (req,res) {
     }).catch(err => {
         console.log(err);
     });
-}
+};
 
 module.exports = app;
 console.log('查询-----加载成功');
