@@ -28,11 +28,6 @@ app.all('*', function (req, res, next) {
 });
 
 app.use(function(req, res, next) {
-  console.log(res);
-  // if (!req.headers.setcookie) {
-  //   return
-  // }
-  console.log(req.headers.setcookie);
 
   next();
 });
@@ -75,5 +70,5 @@ app.get("/performance/model/log", logs.logs);
 //     // response.json(data.toString());
 //     response.send(data.toString());
 // });
-app.listen(10086);
+app.listen(9527);
 console.log('Listening on port 10086······');
