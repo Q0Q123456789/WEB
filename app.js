@@ -1,5 +1,5 @@
 let express = require("express");
-
+const session = require("express-session");
 // 日志
 const log4js = require('log4js');
 log4js.configure('model/log4j.json');
@@ -26,6 +26,10 @@ app.all('*', function (req, res, next) {
   res.header("Content-Type", "application/json;charset=utf-8");
   next()
 });
+
+app.use(session({
+  secret: 'console'
+}))
 
 app.use(function(req, res, next) {
 
@@ -60,6 +64,7 @@ app.get('/performance/model/images',query.images);
 let del = require('./api/delete.js');
 app.post("/performance/model/delete",del.delete);
 app.get("/performance/model/hello", function(request, response){
+    request.session.app_id = 'wxx'
     response.send("hello!");
 });
 //获取日志

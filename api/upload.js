@@ -86,6 +86,8 @@ app.uploadFile = function(req,res) {
     let form = new multiparty.Form();
     form.uploadDir = 'upload'; /*上传的目录*/
     form.parse(req,function (err, fields, files) {
+        console.log('tag', fields)
+        console.log('tag', files)
         let file = files.file[0];
         let uploadName = common.folder(file.originalFilename);
         let filePath = file.path;

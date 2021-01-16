@@ -15,9 +15,9 @@ app.login = function (req,res) {
     UserName = req.body.username;
     const secret = req.body.password;
     console.log(req.body);
-    const password = common.sha256(secret);
-    DB.updateOne('login',{username: req.body.username},{ $set:{loginTime: new Date().toLocaleString() } } ,function (err , tiem){
-        DB.find("login", {username: req.body.username}, function (errs, data) {
+    // const password = common.sha256(secret);
+    DB.updateOne('user',{user: req.body.username},{ $set:{loginTime: new Date().toLocaleString() } } ,function (err , tiem){
+        DB.find("user", {user: req.body.username}, function (errs, data) {
             if (err) {
                 config.obj = {
                     responseCode: "10008",
@@ -30,13 +30,14 @@ app.login = function (req,res) {
                         responseCode: "10008",
                         responseMsg: "无效用户名！"
                     }
-                } else if (data[0].password !== password ) {
+                } else if (data[0].pass !== secret ) {
                     config.obj = {
                         responseCode: "10008",
                         responseMsg: "密码错误！"
                     }
                 } else {
                     const Token = common.sha256(JSON.stringify(data));
+                    req.session.app_id = 'wxx'
                     config.obj = {
                         responseCode: "10001",
                         responseMsg: "登录成功！",
