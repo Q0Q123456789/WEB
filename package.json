@@ -16,7 +16,7 @@
     "express-session": "^1.17.1",
     "fs": "0.0.1-security",
     "js-sha1": "^0.6.0",
-    "log4js": "^3.0.0",
+    "log4js": "^6.4.0",
     "mongodb": "^2.2.33",
     "multiparty": "^4.1.4",
     "mysql": "^2.17.1",
